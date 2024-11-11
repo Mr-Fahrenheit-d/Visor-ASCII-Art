@@ -25,7 +25,7 @@ matriz_ascii_art = [
     "              `````` '-..,___,.,`' .-'                 _"
 ]
 
-```python
+
 def mostrar_ascii_art(matriz):
     for linea in matriz:
         print(linea)  # Imprime cada línea del arte ASCII
