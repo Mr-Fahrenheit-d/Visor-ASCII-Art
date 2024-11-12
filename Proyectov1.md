@@ -1,29 +1,31 @@
-```python
-AsciiMafalda = [
-    "                   ,--,",
-    "                 ,'   :.------.",
-    "             ,--;,--=  \\       `.",
-    "     ,------;--' -~~\"\"--'        `.",
-    "   ,'     ,'                       \\",
-    "  /     /'     _,,--'<              \\",
-    " +----'-'    ,'       \\              :",
-    "   ,'       /      _-' ._            |                      _",
-    "  /        :   ,' ..     `--.        |_                    |\"",
-    " ;          `-,   ''      / `.       ; )   __             O",
-    " |           /        ,--'   |      /  '--~,'|",
-    " |          .'\\    ,-'       /    ,'\\  ;._' ,''        .-.",
-    " |          |  `--'        ,+----'   \\/   `'_,'        | |",
-    " :     _    |            ,'  `.       \\,,.-'          O O",
-    "  \\   ( '-+. `-.._,..--'|\\,___\\`-.     \\                 .",
-    "  _`---'  | `----  \\    ;|o\\      `.__-'                 |",
-    " ((~,/  ~ |       / `--' |o \\   ,,'   `.                 |",
-    "  \\\\ ' _,-|      /       '--' ,'       |`.      .--------+-.",
-    "   '\"~~   |  _,-',---..__,.,=' \\       /  `-.   | [+++]ooO |",
-    "          '\"\" | /      //ooo `-.\\     /....'    |          |",
-    "   -hrr-  _.-'/ \\     /|,8888.  \\\\  ,'.....'    | (#)  (#) |",
-    "        ---___   `-._/ |`8888P   |_  .-'''     `----------'",
-    "              `````` '-..,___,.,`' .-'                 _"
-]
+AsciiMafalda ='''
+          ____
+               ,""-__ _/    )
+              (   _(_=_)-,  (
+              ,) /        \\ |.
+            ,' (/          \\| `.
+           /       ,----._      \\
+       ___;       / .  .  ;      :
+     ,'   `-.    ;  ',.' :       |
+    |  ____  .   ;  (  )  \\      |
+   '`  """" ,|  /    `'   ,:     ;
+   | `.._,,' | ( '---""--' |    /
+   |         |  \\          ;  ,'
+   |   ,MM.  |'-->.      ,<--'--_--")_
+   |   `MM'  |"""| '"><"'  )    ` .___)
+    \\__     / )  \\__/|o|--'`.    |  "")
+   (_( ;---' ,' /    \\ o\\    `.  |,'""
+      "'----; ,'      '-'      ;/ `)
+          \\/,'|             ,,'""`'
+               `--...__..--' |
+        -hrr-   /      |     |
+              Cc `.__.-'--:mdbD
+              /"""m,  V8,"     )
+             db____>8P" "mmmmmmB
+             '8888o'       `"""'
+'''
+# Convertir el string de arte ASCII en una lista de líneas
+AsciiMafaldaLineas = AsciiMafalda.splitlines()
 
 def ConvertirYNormalizarMatriz(ascii_art):
     max_longitud = max(len(linea) for linea in ascii_art)
@@ -58,7 +60,7 @@ def MostrarMatriz(matriz):
         print(''.join(fila))
 
 # Convertir y normalizar el arte ASCII
-MatrizAscii = ConvertirYNormalizarMatriz(AsciiMafalda)
+MatrizAscii = ConvertirYNormalizarMatriz(AsciiMafaldaLineas)
 
 # Rotar la matriz 90 grados en sentido horario y mostrarla
 print("Rotación 90 grados en sentido horario:")
@@ -74,6 +76,7 @@ MostrarMatriz(MatrizRotadaAntihorario)
 print("\nRotación 180 grados:")
 MatrizRotada180 = RotarMatriz180(MatrizAscii)
 MostrarMatriz(MatrizRotada180)
+
 
 
 
