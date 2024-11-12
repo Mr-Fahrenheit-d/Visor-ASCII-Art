@@ -1,18 +1,17 @@
 ```python
-
-AsciiMafalda ='''
+AsciiMafalda = '''
                          ,__   _
                          |      `-,
                           ",       '-.
                            '.        `,-,_         ,,-""'`"",
                             ,'        '' ``,_----_''        `
                          -_,'   .,-,---..-.`    ,'       ,-'
-                          -'   ,,::::::::..,--.-.,     ,,'
+                          -'   ,,::::::::..,--.-.,     ,,
                     ,,--:::'  (::::::::::::::::::,.     `
                 ,_-,:::::::, ,::::::::::::::::::::(,    ,
                ,::::::::::::::::::::::::::::::::::::,.  '
              _,,::::::::::::::::::::::::::::::::::::.`  ,. -
-            ,,:::::::::::::::::::::::::::::::::::::::._,::[..
+            ,,:::::::::::::::::::::::::::::::::::::::._,::[.. 
            -::::::::::::::::::'"`"""'"`""`::::::::::::::::::;_.
           (,::::::::::::::::'               "`:::::::::::::::("
          ',:::::::::::::::::|                  ""::::::::::::::,
@@ -40,13 +39,13 @@ AsciiMafalda ='''
          `|   ``,"`_____'""""""----.____-_-]"'          `|       ,
        ,,'|       ''    """,               '_   _,,'     ,      ,'
      ,,'  "      |        _'                 ""`.7        ,    ,'
-    ,'    ,      ,    --.::-,--.                `"_ _,-,_ .  ,,'
+    ,'    ,      ,    --.::-,--.                `"_ _,-,_ .  ,,
     `'-,. `,    ,'             `_                `""^ ". ": ,''
         `",.    |           ,_,' |                 `., '-.]''
-           `.   :       ,--'"   _'                  `,` ``"
+           `.   :       ,--'"   _'                  `,` `"`
            ::,  |.           _,'`,_.                 '. `.
-          |:::..' "-_.      `'  _'""`""`--.--,___.    `..`..
-          '[:::::;,'`-__"""'  ""'               `""""--',_,'
+          |:::..' "-_.      `'  _'""`""`--.--,___.    `..`.
+          '[:::::;,'`-__"""'  ""'               `""""--',_,''
            |::::::-.   ``'-.,-.,---------------,..- ---`"
            ,::'  "":..     |'             ,,"'
           ,::'     "":, ,  |.           ,-:.
@@ -61,8 +60,35 @@ AsciiMafalda ='''
                 '"":::::::::::::'""''
                       `""""'
 '''
-# Convertir el string de arte ASCII en una lista de líneas
-AsciiMafaldaLineas = AsciiMafalda.splitlines()
+
+AsciiMafalda2 = """
+                         .-'')
+            ,.___  __.-'   /
+           _;----''.._)_  (--...__
+         ,'           `.__(       `-._
+        '      __,....,_              \\
+       |    ,,'o    o | `.             \\
+        `. |    _'  _.'  /              |
+       ,.- `>-'( )''    |               |
+     ,'  _ /  ____,.--./                |
+    |   / )")'         |               /
+    `. ( ( (._         _._        __.-'
+      `->..___`,-...--' /,--:'''''
+       /      ``>/o\\   //    `.
+      /       .'/o /`-'|       \\
+  ___(      _/  `-'   ,'        \\
+ |    `---,'---...._,'--.__     |\\
+ | ,-----',       ,',' , _,`----' \\
+ | |     \\|       ('`-'-'  (`-.____`.
+ | |      `.       \\        )\\______)
+ | |        `-----'''------','op||
+ | |        `-,oobb.'ibbbbb: ,88||
+ | |         d"'''`Y8;"'''`PY8P_)|
+ | | -hrr-  `8b___od8boooood8P| ||
+ | |          Y8P"'' Y888PP' || ||
+"""
+
+AsciiArts = [AsciiMafalda, AsciiMafalda2]
 
 def ConvertirYNormalizarMatriz(ascii_art):
     max_longitud = max(len(linea) for linea in ascii_art)
@@ -96,26 +122,62 @@ def MostrarMatriz(matriz):
     for fila in matriz:
         print(''.join(fila))
 
-# Convertir y normalizar el arte ASCII
-MatrizAscii = ConvertirYNormalizarMatriz(AsciiMafaldaLineas)
+def CalcularFrecuencias(ascii_art):
+    from collections import Counter
+    conteo = Counter(''.join(ascii_art))
+    print("\nFrecuencias de caracteres:")
+    for caracter, frecuencia in conteo.items():
+        print(f"'{caracter}': {frecuencia}")
 
-# Rotar la matriz 90 grados en sentido horario y mostrarla
-print("Rotación 90 grados en sentido horario:")
-MatrizRotadaHorario = RotarMatriz90Horario(MatrizAscii)
-MostrarMatriz(MatrizRotadaHorario)
+def SeleccionarArte():
+    print("\nSeleccione el arte ASCII:")
+    for i, art in enumerate(AsciiArts):
+        print(f"{i + 1}. Arte {i + 1}")
+    seleccion = int(input("Elija una opción (1 o 2): ")) - 1
+    return AsciiArts[seleccion].splitlines()
 
-# Rotar la matriz 90 grados en sentido antihorario y mostrarla
-print("\nRotación 90 grados en sentido antihorario:")
-MatrizRotadaAntihorario = RotarMatriz90Antihorario(MatrizAscii)
-MostrarMatriz(MatrizRotadaAntihorario)
+def MostrarMenu():
+    print("\n--- Menú ---")
+    print("1. Mostrar el arte ASCII original")
+    print("2. Rotar 90 grados en sentido horario")
+    print("3. Rotar 90 grados en sentido antihorario")
+    print("4. Rotar 180 grados")
+    print("5. Calcular frecuencias de caracteres")
+    print("6. Volver a seleccionar arte ASCII")
+    print("0. Salir")
+    return input("Elija una opción: ")
 
-# Rotar la matriz 180 grados y mostrarla
-print("\nRotación 180 grados:")
-MatrizRotada180 = RotarMatriz180(MatrizAscii)
-MostrarMatriz(MatrizRotada180)
+def MostrarArteOriginal(ascii_art):
+    for linea in ascii_art:
+        print(linea)
 
+arte_seleccionado = SeleccionarArte()
+MatrizAscii = ConvertirYNormalizarMatriz(arte_seleccionado)
 
-
-
-
-
+opcion = ''
+while opcion != '0':
+    opcion = MostrarMenu()
+    if opcion == '1':
+        print("\nArte ASCII original:")
+        MostrarArteOriginal(arte_seleccionado)
+    elif opcion == '2':
+        print("\nRotación 90 grados en sentido horario:")
+        MatrizRotadaHorario = RotarMatriz90Horario(MatrizAscii)
+        MostrarMatriz(MatrizRotadaHorario)
+    elif opcion == '3':
+        print("\nRotación 90 grados en sentido antihorario:")
+        MatrizRotadaAntihorario = RotarMatriz90Antihorario(MatrizAscii)
+        MostrarMatriz(MatrizRotadaAntihorario)
+    elif opcion == '4':
+        print("\nRotación 180 grados:")
+        MatrizRotada180 = RotarMatriz180(MatrizAscii)
+        MostrarMatriz(MatrizRotada180)
+    elif opcion == '5':
+        CalcularFrecuencias(arte_seleccionado)
+    elif opcion == '6':
+        arte_seleccionado = SeleccionarArte()
+        MatrizAscii = ConvertirYNormalizarMatriz(arte_seleccionado)
+    elif opcion == '0':
+        print("Saliendo del programa.")
+    else:
+        print("Opción no válida, intente de nuevo.")
