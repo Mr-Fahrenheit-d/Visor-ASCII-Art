@@ -1,28 +1,26 @@
-```python
-#Informacion General:
+# Información General
 # ------------ Grupo 6 ----------------
 # Intregrantes:
 # Andy Mathias Torres Guerrero   - 202410254
 # Kevin Axel Sulca Soto          - 202410687
 # Mariana Lucia Gamboa Hidalgo   - 202410102
-# Diego Alonso Pizarro Dominguez - 202410027
-
+# Diego Alonso Pizarro Dominguez - 202410027
 
 Ascii_rodolfo = '''
-      /.m.\
-     /.mnnm.\                                              ___
-    |.mmnvvnm.\.                                     .,,,/`mmm.\
-    |.mmnnvvnm.\:;,.                           ..,,;;;/.mmnnnmm.\
-    \ mmnnnvvnm.\::;;,                    .,;;;;;;;;/.mmmnnvvnnm.|
-     \`mmnnnvvnm.\::;::.sSSs      sSSs ,;;;;;;;;;;/.mmmnnvvvnnmm'/
-       \`mmnnnvnm.\:::::SSSS,,,,,,SSSS:::::::;;;/.mmmnnvvvnnmmm'/
-          \`mnvvnm.\::%%%;;;;;;;;;;;%%%%:::::;/.mnnvvvvnnmmmmm'/
-             \`mmmm.%%;;;;;%%%%%%%%%%%%%%%::/.mnnvvvnnmmmmm'/ '
-                \`%%;;;;%%%%s&&&&&&&&&s%%%%mmmnnnmmmmmm'/ '
-     |           `%;;;%%%%s&&.%%%%%%.%&&%mmmmmmmmmm'/ '
-\    |    /       %;;%%%%&&.%;`    '%.&&%%%////// '
-  \  |  /         %%%%%%s&.%% #     %.&&%%%%%//%
-    \  .:::::.  ,;%%%%s&&&&.%;     ;.&&%%%%%%%%/,
+      /.m.\\
+     /.mnnm.\\                                              ___
+    |.mmnvvnm.\\.                                     .,,,/`mmm.\\
+    |.mmnnvvnm.\\:;,.                           ..,,;;;/.mmnnnmm.\\
+    \\ mmnnnvvnm.\\::;;,                    .,;;;;;;;;/.mmmnnvvnnm.|
+     \\`mmnnnvvnm.\\::;::.sSSs      sSSs ,;;;;;;;;;;/.mmmnnvvvnnmm'/
+       \\`mmnnnvnm.\\:::::SSSS,,,,,,SSSS:::::::;;;/.mmmnnvvvnnmmm'/
+          \\`mnvvnm.\\::%%%;;;;;;;;;;;%%%%:::::;/.mnnvvvvnnmmmmm'/
+             \\`mmmm.%%;;;;;%%%%%%%%%%%%%%%::/.mnnvvvnnmmmmm'/
+                \\`%%;;;;%%%%s&&&&&&&&&s%%%%mmmnnnmmmmmm'/
+     |           `%;;;%%%%s&&.%%%%%%.%&&%mmmmmmmmmm'/
+\\    |    /       %;;%%%%&&.%;`    '%.&&%%%//////'
+  \\  |  /         %%%%%%s&.%% #     %.&&%%%%%//%
+    \\  .:::::.  ,;%%%%s&&&&.%;     ;.&&%%%%%%%%/,
 -!!!- ::#:::::%%%%%%s&&&&&&&&&&&&&&&&&%%%%%%%%%%%
     / :##:::::&&&&&&&&&&&&&&&&&&&&&%%%%%%%%%%%%%%,
   /  | `:#:::&&&&&&&&&&&&&&&&&&&&&&&&%%%%%%%%%%%%%
@@ -40,32 +38,31 @@ Ascii_rodolfo = '''
 
 Ascii_Arbolito = '''
            *             ,
-                       _/^\_
+                       _/^\\_
                       <     >
-     *                 /.-.\         *
-              *        `/&\`                   *
+     *                 /.-.\\         *
+              *        `/&\\`                   *
                       ,@.*;@,
-                     /_o.I %_\    *
+                     /_o.I %_\\    *
         *           (`'--:o(_@;
                    /`;--.,__ `')             *
-                  ;@`o % O,*`'`&\
-            *    (`'--)_@ ;o %'()\      *
+                  ;@`o % O,*`'`&\\
+            *    (`'--)_@ ;o %'()\\      *
                  /`;--._`''--._O'@;
                 /&*,()~o`;-.,_ `""`)
-     *          /`,@ ;+& () o*`;-';\
-               (`""--.,_0 +% @' &()\
+     *          /`,@ ;+& () o*`;-';\\
+               (`""--.,_0 +% @' &()\\
                /-.,_    ``''--....-'`)  *
-          *    /@%;o`:;'--,.__   __.'\
+          *    /@%;o`:;'--,.__   __.'\\
               ;*,&(); @ % &^;~`"`o;@();         *
-              /(); o^~; & ().o@*&`;&%O\
+              /(); o^~; & ().o@*&`;&%O\\
         jgs   `"="==""==,,,.,="=="==="`
-           __.----.(\-''#####---...___...-----._
-         '`         \)_`"""""`
+           __.----.(\\-''#####---...___...-----._
+         '`         \\)_`"""""
                  .--' ')
-               o(  )_-\
+               o(  )_-
                  `"""` `
 '''
-
 
 AsciiArts = [Ascii_rodolfo, Ascii_Arbolito]
 
@@ -74,7 +71,7 @@ def ConvertirArteALista(arte_ascii):
 
 def ConvertirYNormalizarMatriz(ascii_art):
     max_longitud = max(len(linea) for linea in ascii_art)
-    return [list(linea.ljust(max_longitud)) for linea in ascii_art]
+    return [list(linea.rstrip().ljust(max_longitud)) for linea in ascii_art]
 
 def RotarMatriz90Horario(Matriz):
     Filas, Columnas = len(Matriz), len(Matriz[0])
