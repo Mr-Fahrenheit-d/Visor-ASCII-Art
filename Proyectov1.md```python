@@ -6,7 +6,7 @@
 # Mariana Lucia Gamboa Hidalgo   - 202410102
 # Diego Alonso Pizarro Dominguez - 202410027
 
-Ascii_rodolfo = '''
+Ascii_rodolfo = r'''
       /.m.\\
      /.mnnm.\\                                              ___
     |.mmnvvnm.\\.                                     .,,,/`mmm.\\
@@ -36,7 +36,7 @@ Ascii_rodolfo = '''
                   SSSSSSSSSSSSSSSSSS%%%%%%%%%%%%%%%%%%%%.
 '''
 
-Ascii_Arbolito = '''
+Ascii_Arbolito = r'''
            *             ,
                        _/^\\_
                       <     >
@@ -66,62 +66,92 @@ Ascii_Arbolito = '''
 
 AsciiArts = [Ascii_rodolfo, Ascii_Arbolito]
 
+# Función para convertir arte a lista
 def ConvertirArteALista(arte_ascii):
     return arte_ascii.splitlines()
 
+# Función para normalizar la matriz
 def ConvertirYNormalizarMatriz(ascii_art):
     max_longitud = max(len(linea) for linea in ascii_art)
     return [list(linea.rstrip().ljust(max_longitud)) for linea in ascii_art]
 
+# Funciones para rotaciones
 def RotarMatriz90Horario(Matriz):
     Filas, Columnas = len(Matriz), len(Matriz[0])
-    NuevaMatriz = [[' ' for _ in range(Filas)] for _ in range(Columnas)]
-    for i in range(Filas):
-        for j in range(Columnas):
-            NuevaMatriz[j][Filas - 1 - i] = Matriz[i][j]
-    return NuevaMatriz
+    return [[Matriz[Filas - 1 - i][j] for i in range(Filas)] for j in range(Columnas)]
 
 def RotarMatriz90Antihorario(Matriz):
     Filas, Columnas = len(Matriz), len(Matriz[0])
-    NuevaMatriz = [[' ' for _ in range(Filas)] for _ in range(Columnas)]
-    for i in range(Filas):
-        for j in range(Columnas):
-            NuevaMatriz[Columnas - 1 - j][i] = Matriz[i][j]
-    return NuevaMatriz
+    return [[Matriz[i][Columnas - 1 - j] for i in range(Filas)] for j in range(Columnas)]
 
 def RotarMatriz180(Matriz):
     Filas, Columnas = len(Matriz), len(Matriz[0])
-    NuevaMatriz = [[' ' for _ in range(Columnas)] for _ in range(Filas)]
-    for i in range(Filas):
-        for j in range(Columnas):
-            NuevaMatriz[Filas - 1 - i][Columnas - 1 - j] = Matriz[i][j]
-    return NuevaMatriz
+    return [[Matriz[Filas - 1 - i][Columnas - 1 - j] for j in range(Columnas)] for i in range(Filas)]
 
+# Función para invertir el arte verticalmente
+def InvertirVerticalmente(Matriz):
+    return Matriz[::-1]
+
+# Nueva función para combinar el efecto espejo y rotación 180 grados
+def EfectoEspejoConRotacion(Matriz):
+    MatrizInvertida = InvertirVerticalmente(Matriz)
+    return RotarMatriz180(MatrizInvertida)
+
+# Función para mostrar una matriz
 def MostrarMatriz(matriz):
     for fila in matriz:
         print(''.join(fila))
 
-def SeleccionarArte():
-    print("\nSeleccione el arte ASCII:")
-    for i, art in enumerate(AsciiArts):
-        print(f"{i + 1}. Arte {i + 1}")
-    seleccion = int(input("Elija una opción (1 o 2): ")) - 1
-    return AsciiArts[seleccion]
+# Función para contar frecuencias de caracteres
+def ContarFrecuencias(ascii_art):
+    from collections import Counter
+    caracteres = ''.join(''.join(fila) for fila in ascii_art)
+    frecuencias = Counter(caracteres)
+    print("\nFrecuencia de caracteres:")
+    for char, freq in frecuencias.items():
+        print(f"'{char}': {freq}")
 
+# Función para leer un archivo
+def LeerArteDesdeArchivo():
+    try:
+        nombre_archivo = input("Ingrese el nombre del archivo (con extensión): ")
+        with open(nombre_archivo, 'r') as archivo:
+            arte_ascii = archivo.readlines()
+        print("\nArte cargado correctamente:")
+        for linea in arte_ascii:
+            print(linea, end='')
+        return arte_ascii
+    except FileNotFoundError:
+        print("Error: No se encontró el archivo. Intente nuevamente.")
+        return None
+
+# Función para guardar arte en un archivo
+def GuardarArteEnArchivo(ascii_art):
+    nombre_archivo = input("Ingrese el nombre del archivo para guardar (con extensión): ")
+    try:
+        with open(nombre_archivo, 'w') as archivo:
+            for linea in ascii_art:
+                archivo.write(''.join(linea) + '\n')
+        print(f"\nArte ASCII guardado exitosamente en '{nombre_archivo}'.")
+    except Exception as e:
+        print(f"Error al guardar el archivo: {e}")
+
+# Menú principal
 def MostrarMenu():
     print("\n--- Menú ---")
     print("1. Mostrar el arte ASCII original")
     print("2. Rotar 90 grados en sentido horario")
     print("3. Rotar 90 grados en sentido antihorario")
     print("4. Rotar 180 grados")
+    print("5. Contar frecuencias de caracteres")
+    print("6. Leer arte desde un archivo")
+    print("7. Guardar arte en un archivo")
+    print("8. Efecto espejo con rotación 180 grados")
     print("0. Salir")
     return input("Elija una opción: ")
 
-def MostrarArteOriginal(ascii_art):
-    for linea in ascii_art:
-        print(linea)
-
-arte_seleccionado = SeleccionarArte()
+# Código principal
+arte_seleccionado = Ascii_rodolfo
 arte_seleccionado_lista = ConvertirArteALista(arte_seleccionado)
 MatrizAscii = ConvertirYNormalizarMatriz(arte_seleccionado_lista)
 
@@ -130,7 +160,7 @@ while opcion != '0':
     opcion = MostrarMenu()
     if opcion == '1':
         print("\nArte ASCII original:")
-        MostrarArteOriginal(arte_seleccionado_lista)
+        MostrarMatriz(MatrizAscii)
     elif opcion == '2':
         print("\nRotación 90 grados en sentido horario:")
         MatrizAscii = RotarMatriz90Horario(MatrizAscii)
@@ -142,6 +172,20 @@ while opcion != '0':
     elif opcion == '4':
         print("\nRotación 180 grados:")
         MatrizAscii = RotarMatriz180(MatrizAscii)
+        MostrarMatriz(MatrizAscii)
+    elif opcion == '5':
+        print("\nFrecuencias de caracteres:")
+        ContarFrecuencias(MatrizAscii)
+    elif opcion == '6':
+        arte_cargado = LeerArteDesdeArchivo()
+        if arte_cargado:
+            arte_seleccionado_lista = ConvertirArteALista(''.join(arte_cargado))
+            MatrizAscii = ConvertirYNormalizarMatriz(arte_seleccionado_lista)
+    elif opcion == '7':
+        GuardarArteEnArchivo(MatrizAscii)
+    elif opcion == '8':
+        print("\nEfecto espejo con rotación 180 grados:")
+        MatrizAscii = EfectoEspejoConRotacion(MatrizAscii)
         MostrarMatriz(MatrizAscii)
     elif opcion == '0':
         print("Saliendo del programa.")
